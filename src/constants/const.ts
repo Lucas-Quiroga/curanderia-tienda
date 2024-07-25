@@ -17,7 +17,7 @@ export const PHONE_NUMBER: string = "+5491127877943";
 
 export const DATA_TIENDA: DataTienda = {
   header: {
-    title: "Curandería-Santería",
+    title: "La Curandería",
   },
   categories: CATEGORY_SELECT,
   faqs: [

@@ -6,8 +6,10 @@ import type { IconType } from "react-icons/lib";
 import { TfiPanel } from "react-icons/tfi";
 import { MdAdd } from "react-icons/md";
 import { GoHome } from "react-icons/go";
-
+import { Image } from "astro:assets";
+import logo from "@/assets/logo.jpg";
 const { session } = Astro.props;
+import { Separator } from "@/components/ui/separator";
 
 const routes = {
   admin: [
@@ -33,20 +35,33 @@ const routes = {
 >
   <div
     class:list={[
-      "space-x-2 mb-6",
+      "space-x-2 mb-6 flex flex-col items-center",
+
       {
         "flex flex-col items-center": session,
         "flex items-center": !session,
       },
     ]}
   >
-    <p class="text-lg font-bold dark:text-white">
-      {session ? "Panel de administración" : DATA_TIENDA.header.title}
-    </p>
+    <div class="flex justify-center items-center gap-2">
+      <div class="text-2xl font-bold">
+        {
+          session ? (
+            <p class="  dark:text-white text-black">Panel de administración</p>
+          ) : (
+            <p class="dark:text-white text-[#649977]">
+              {DATA_TIENDA.header.title}
+            </p>
+          )
+        }
+      </div>
+
+      {!session && <SlMagicWand className="dark:text-white text-[#649977]" />}
+    </div>
+    <Separator className="my-4" />
     <p class="text-gray-400 text-sm italic">
       {session && `Bienvenido ${session.name}`}
     </p>
-    {!session && <SlMagicWand className="dark:text-white" />}
   </div>
 
   {
@@ -73,6 +88,14 @@ const routes = {
         }))}
         localStorageKey="user-aside"
       />
+    )
+  }
+
+  {
+    !session && (
+      <div class="hidden xl:flex items-center justify-center mb-4">
+        <Image src={logo} alt="Logo" class="w-full h-full rounded-full" />
+      </div>
     )
   }
 </aside>
